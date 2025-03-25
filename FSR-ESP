@@ -1,0 +1,21 @@
+/*
+ * FSR Sensor Example (ESP)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - One end of FSR -> 3.3V (or 5V with proper voltage divider)
+ *  - Other end -> Analog Pin GPIO36 (or alternate ADC pin) with resistor to GND
+ */
+
+const int fsrPin = 36;
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int fsrReading = analogRead(fsrPin);
+  Serial.print("FSR Reading: ");
+  Serial.println(fsrReading);
+  delay(500);
+}
