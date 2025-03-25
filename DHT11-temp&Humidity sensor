@@ -1,0 +1,40 @@
+/*
+ * DHT11 Temperature & Humidity Sensor Example (Arduino)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC  -> 5V
+ *  - GND  -> GND
+ *  - Data -> Digital Pin 2 (alternate: Pin 3)
+ *
+ * Note: You will need the DHT sensor library by Adafruit.
+ */
+
+#include "DHT.h"
+
+#define DHTPIN 2
+#define DHTTYPE DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+  delay(2000);
+  float humidity = dht.readHumidity();
+  float temperature = dht.readTemperature();
+  
+  if (isnan(humidity) || isnan(temperature)) {
+    Serial.println("Failed to read from DHT sensor!");
+    return;
+  }
+  
+  Serial.print("Humidity: ");
+  Serial.print(humidity);
+  Serial.print(" %, Temp: ");
+  Serial.print(temperature);
+  Serial.println(" *C");
+}
