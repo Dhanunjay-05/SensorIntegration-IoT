@@ -1,0 +1,22 @@
+/*
+ * YL-69 Soil Moisture Sensor Example (Arduino)
+ * Author: anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 5V
+ *  - GND -> GND
+ *  - Analog Output -> A0 (alternate: A1)
+ */
+
+const int moisturePin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int moisture = analogRead(moisturePin);
+  Serial.print("Soil Moisture: ");
+  Serial.println(moisture);
+  delay(1000);
+}
