@@ -1,0 +1,21 @@
+/*
+ * FSR Sensor Example (Arduino)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - One end of FSR -> 5V
+ *  - Other end -> Analog Pin A0 with a resistor to GND (voltage divider)
+ */
+
+const int fsrPin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int fsrReading = analogRead(fsrPin);
+  Serial.print("FSR Reading: ");
+  Serial.println(fsrReading);
+  delay(500);
+}
