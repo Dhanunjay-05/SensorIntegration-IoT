@@ -1,0 +1,36 @@
+/*
+ * SHT25 Sensor Example (Arduino)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 3.3V or 5V (verify module)
+ *  - GND -> GND
+ *  - SDA -> A4 (alternate: D2)
+ *  - SCL -> A5 (alternate: D3)
+ *
+ * Requires: SHTSensor library.
+ */
+
+#include <Wire.h>
+#include <SHTSensor.h>
+
+SHTSensor sht;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+  sht.begin();
+}
+
+void loop() {
+  if (sht.read()) {
+    Serial.print("Temp: ");
+    Serial.print(sht.getTemperature());
+    Serial.print(" °C, Humidity: ");
+    Serial.print(sht.getHumidity());
+    Serial.println(" %");
+  } else {
+    Serial.println("Failed to read SHT25 sensor.");
+  }
+  delay(2000);
+}
