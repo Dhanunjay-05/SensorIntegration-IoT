@@ -1,0 +1,39 @@
+/*
+ * TSL2561 Light Sensor Example (ESP)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 3.3V or 5V
+ *  - GND -> GND
+ *  - SDA -> GPIO 21 (alternate: GPIO 18)
+ *  - SCL -> GPIO 22 (alternate: GPIO 19)
+ *
+ * Requires: Adafruit_TSL2561 library.
+ */
+
+#include <Wire.h>
+#include <Adafruit_TSL2561_U.h>
+
+Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(21,22);
+  if(!tsl.begin()){
+    Serial.println("No TSL2561 detected");
+    while(1);
+  }
+  tsl.enableAutoRange(true);
+  tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);
+}
+
+void loop() {
+  sensors_event_t event;
+  tsl.getEvent(&event);
+  if (event.light) {
+    Serial.print("Light: ");
+    Serial.print(event.light);
+    Serial.println(" lux");
+  }
+  delay(1000);
+}
