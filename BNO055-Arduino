@@ -1,0 +1,37 @@
+/*
+ * BNO055 Sensor Example (Arduino)
+ * Author: anirudh dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 5V
+ *  - GND -> GND
+ *  - SDA -> A4 (alternate: D2)
+ *  - SCL -> A5 (alternate: D3)
+ *
+ * Requires: Adafruit_BNO055 library.
+ */
+
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BNO055.h>
+
+Adafruit_BNO055 bno = Adafruit_BNO055(55);
+
+void setup() {
+  Serial.begin(9600);
+  if (!bno.begin()) {
+    Serial.println("BNO055 not detected!");
+    while (1);
+  }
+  delay(1000);
+  bno.setExtCrystalUse(true);
+}
+
+void loop() {
+  sensors_event_t event;
+  bno.getEvent(&event);
+  Serial.print("X: "); Serial.print(event.orientation.x);
+  Serial.print(" | Y: "); Serial.print(event.orientation.y);
+  Serial.print(" | Z: "); Serial.println(event.orientation.z);
+  delay(500);
+}
