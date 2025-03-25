@@ -1,0 +1,22 @@
+/*
+ * YL-69 Soil Moisture Sensor Example (ESP)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 3.3V or 5V (verify module)
+ *  - GND -> GND
+ *  - Analog Output -> GPIO 36 (alternate: GPIO 39)
+ */
+
+const int moisturePin = 36;
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int moisture = analogRead(moisturePin);
+  Serial.print("Soil Moisture: ");
+  Serial.println(moisture);
+  delay(1000);
+}
