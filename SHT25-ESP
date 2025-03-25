@@ -1,0 +1,36 @@
+/*
+ * SHT25 Sensor Example (ESP)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 3.3V (check module specifications)
+ *  - GND -> GND
+ *  - SDA -> GPIO 21 (alternate: GPIO 18)
+ *  - SCL -> GPIO 22 (alternate: GPIO 19)
+ *
+ * Requires: SHTSensor library.
+ */
+
+#include <Wire.h>
+#include <SHTSensor.h>
+
+SHTSensor sht;
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(21, 22);
+  sht.begin();
+}
+
+void loop() {
+  if (sht.read()) {
+    Serial.print("Temp: ");
+    Serial.print(sht.getTemperature());
+    Serial.print(" °C, Humidity: ");
+    Serial.print(sht.getHumidity());
+    Serial.println(" %");
+  } else {
+    Serial.println("Failed to read SHT25 sensor.");
+  }
+  delay(2000);
+}
