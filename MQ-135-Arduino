@@ -1,0 +1,22 @@
+/*
+ * MQ-135 Air Quality Sensor Example (Arduino)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 5V
+ *  - GND -> GND
+ *  - Analog Output -> A0 (alternate: A1)
+ */
+
+const int mq135Pin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = analogRead(mq135Pin);
+  Serial.print("MQ-135 Value: ");
+  Serial.println(value);
+  delay(1000);
+}
