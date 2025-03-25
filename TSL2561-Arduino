@@ -1,0 +1,38 @@
+/*
+ * TSL2561 Light Sensor Example (Arduino)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 3.3V or 5V
+ *  - GND -> GND
+ *  - SDA -> A4 (alternate: D2)
+ *  - SCL -> A5 (alternate: D3)
+ *
+ * Requires: Adafruit_TSL2561 library.
+ */
+
+#include <Wire.h>
+#include <Adafruit_TSL2561_U.h>
+
+Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
+
+void setup() {
+  Serial.begin(9600);
+  if(!tsl.begin()){
+    Serial.println("No TSL2561 detected");
+    while(1);
+  }
+  tsl.enableAutoRange(true);
+  tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);
+}
+
+void loop() {
+  sensors_event_t event;
+  tsl.getEvent(&event);
+  if (event.light) {
+    Serial.print("Light: ");
+    Serial.print(event.light);
+    Serial.println(" lux");
+  }
+  delay(1000);
+}
