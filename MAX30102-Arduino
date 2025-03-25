@@ -1,0 +1,33 @@
+/*
+ * MAX30102 Heart Rate & SpO2 Sensor Example (Arduino)
+ * Author: anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 3.3V or 5V (check module)
+ *  - GND -> GND
+ *  - SDA -> A4 (alternate: D2)
+ *  - SCL -> A5 (alternate: D3)
+ *
+ * Requires: MAX30102 library.
+ */
+
+#include <Wire.h>
+#include <MAX30105.h>
+
+MAX30105 particleSensor;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+  if (!particleSensor.begin()) {
+    Serial.println("MAX30102 not found.");
+    while (1);
+  }
+}
+
+void loop() {
+  long irValue = particleSensor.getIR();
+  Serial.print("IR: ");
+  Serial.println(irValue);
+  delay(500);
+}
