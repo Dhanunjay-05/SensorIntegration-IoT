@@ -1,0 +1,22 @@
+/*
+ * MQ-2 Gas Sensor Example (Arduino)
+ * Author: Anirudh dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 5V
+ *  - GND -> GND
+ *  - Analog Output (A0) -> A0 (alternate: A1)
+ */
+
+const int mq2Pin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int sensorValue = analogRead(mq2Pin);
+  Serial.print("MQ-2 Sensor Value: ");
+  Serial.println(sensorValue);
+  delay(1000);
+}
