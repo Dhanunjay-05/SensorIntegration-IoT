@@ -1,0 +1,23 @@
+/*
+ * PIR Motion Sensor Example (Arduino)
+ * Author: Anirudh Dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 5V
+ *  - GND -> GND
+ *  - OUT -> Digital Pin 2 (alternate: 3)
+ */
+
+const int pirPin = 2;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pirPin, INPUT);
+}
+
+void loop() {
+  int motion = digitalRead(pirPin);
+  Serial.print("Motion: ");
+  Serial.println(motion);
+  delay(500);
+}
