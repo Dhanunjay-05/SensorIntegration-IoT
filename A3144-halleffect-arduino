@@ -1,0 +1,23 @@
+/*
+ * A3144 Hall Effect Sensor Example (Arduino)
+ * Author: Anirudh dhanunjay
+ *
+ * Connections:
+ *  - VCC -> 5V
+ *  - GND -> GND
+ *  - Output -> Digital Pin 2 (alternate: 3)
+ */
+
+const int hallPin = 2;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(hallPin, INPUT);
+}
+
+void loop() {
+  int state = digitalRead(hallPin);
+  Serial.print("Hall Sensor State: ");
+  Serial.println(state);
+  delay(500);
+}
