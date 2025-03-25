@@ -1,0 +1,36 @@
+/*
+ * HC-SR04 Ultrasonic Sensor Example (ESP Boards)
+ * Author: Anirudh Dhanunjay 
+ *
+ * Connections:
+ *  - VCC  -> 5V or 3.3V (depending on your sensor module)
+ *  - GND  -> GND
+ *  - Trig -> GPIO 5 (alternate: GPIO 4)
+ *  - Echo -> GPIO 18 (alternate: GPIO 19)
+ */
+
+const int trigPin = 5;
+const int echoPin = 18;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+}
+
+void loop() {
+  long duration, distance;
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+  delay(1000);
+}
