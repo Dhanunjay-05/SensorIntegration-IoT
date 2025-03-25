@@ -1,0 +1,32 @@
+/*
+ * TOF10120 Time-of-Flight Sensor Example (Arduino)
+ * Author: Anirudh dhanunjay
+ *
+ * Connections: (Check your module; this is a sample setup)
+ *  - VCC -> 5V
+ *  - GND -> GND
+ *  - SDA -> A4 (alternate: D2)
+ *  - SCL -> A5 (alternate: D3)
+ *
+ * Requires: A suitable ToF library (e.g., for VL53L0X)
+ */
+
+#include <Wire.h>
+#include <VL53L0X.h>
+
+VL53L0X sensor;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+  sensor.init();
+  sensor.setTimeout(500);
+  sensor.startContinuous();
+}
+
+void loop() {
+  Serial.print("Distance: ");
+  Serial.print(sensor.readRangeContinuousMillimeters());
+  Serial.println(" mm");
+  delay(100);
+}
